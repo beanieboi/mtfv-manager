@@ -31,3 +31,24 @@ l.matches.each do |m|
   m.save
 end
 ```
+
+## move rankings to next season
+
+```ruby
+old_season = Season.where(saisonbezeichnung: "2020")
+new_season = Season.where(saisonbezeichnung: "2021")
+old_season.rankings.each do |r|
+  r.saison_id = new_season.id
+end
+```
+
+## move rankings to next season and extend over multiple years
+
+```ruby
+old_season = Season.where(saisonbezeichnung: "2020")
+new_season = Season.where(saisonbezeichnung: "2021")
+old_season.rankings.each do |r|
+  r.saison_id = new_season.id
+  r.letzter_tag = Date.new(2021,12,31)
+end
+```
