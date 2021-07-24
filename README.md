@@ -1,24 +1,33 @@
-# README
+# MTFV Manager
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+a tool for managing sportsmanager because reasons.
 
-Things you may want to cover:
+## find inactive players
 
-* Ruby version
+```ruby
+club = Club.first
+ip = InactivePlayers.new(club: club)
+ip.call
+```
 
-* System dependencies
+## setting dates for matches
 
-* Configuration
+```ruby
+z = [
+  Time.new(2021, 8, 29, 11, 00, 00, "+00:00"),
+  Time.new(2021, 8, 29, 13, 00, 00, "+00:00"),
+  Time.new(2021, 8, 29, 15, 00, 00, "+00:00"),
+  Time.new(2021, 8, 29, 17, 00, 00, "+00:00"),
+  Time.new(2021, 9, 18, 11, 00, 00, "+00:00"),
+  Time.new(2021, 9, 18, 13, 00, 00, "+00:00"),
+  Time.new(2021, 9, 18, 15, 00, 00, "+00:00"),
+  Time.new(2021, 9, 18, 17, 00, 00, "+00:00"),
+]
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+l = League.find(50)
+l.matches.each do |m|
+  m.zeitpunkt = z[m.spieltag-1]
+  m.spielort_id = 13
+  m.save
+end
+```
