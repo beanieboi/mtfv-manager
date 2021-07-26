@@ -52,3 +52,9 @@ old_season.rankings.each do |r|
   r.letzter_tag = Date.new(2021,12,31)
 end
 ```
+
+## check next player number for various states
+
+```ruby
+NextPlayerNumber.new(state: :sachsen).call
+```
